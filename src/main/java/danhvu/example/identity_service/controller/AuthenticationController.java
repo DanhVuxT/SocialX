@@ -31,12 +31,12 @@ public class AuthenticationController {
         return ApiResponse.from(ApiResponseCode.SUCCESS_UPDATE, authenticationService.authenticate(request));
     }
 
-//    @PostMapping("/introspect")
-//    ApiResponse<IntrospectResponse> authenticate(@RequestBody IntrospectRequest request)
-//            throws ParseException, JOSEException {
-//        var result = authenticationService.introspect(request);
-//        return ApiResponse.<IntrospectResponse>builder().result(result).build();
-//    }
+    @PostMapping("/introspect")
+    ApiResponse<IntrospectResponse> authenticate(@RequestBody IntrospectRequest request)
+            throws ParseException, JOSEException {
+        var result = authenticationService.introspect(request);
+        return ApiResponse.from(ApiResponseCode.SUCCESS_UPDATE, authenticationService.introspect(request));
+    }
 //
 //    @PostMapping("/refresh")
 //    ApiResponse<AuthenticationResponse> authenticate(@RequestBody RefreshRequest request)
@@ -45,9 +45,9 @@ public class AuthenticationController {
 //        return ApiResponse.<AuthenticationResponse>builder().result(result).build();
 //    }
 //
-//    @PostMapping("/logout")
-//    ApiResponse<Void> logout(@RequestBody LogoutRequest request) throws ParseException, JOSEException {
-//        authenticationService.logout(request);
-//        return ApiResponse.<Void>builder().build();
-//    }
+    @PostMapping("/logout")
+    ApiResponse<Void> logout(@RequestBody LogoutRequest request) throws ParseException, JOSEException {
+        authenticationService.logout(request);
+        return ApiResponse.<Void>builder().build();
+    }
 }

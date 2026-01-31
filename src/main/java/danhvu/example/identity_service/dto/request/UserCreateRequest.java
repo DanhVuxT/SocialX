@@ -21,5 +21,4 @@ public class UserCreateRequest {
         String phoneNumber;
         String password;
         Date dob;
-        Set<String> roles;
 }

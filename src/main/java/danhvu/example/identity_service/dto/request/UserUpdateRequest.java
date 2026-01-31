@@ -19,7 +19,7 @@ import java.util.List;
 public class UserUpdateRequest {
     String username;
     String email;
-    int phoneNumber;
+    String phoneNumber;
     String password;
     Date dob;
     List<String> roles;

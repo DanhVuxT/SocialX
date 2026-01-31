@@ -9,7 +9,7 @@ spring:
 
     password:
     username: root
-    driver-class-name: com.mysql.cj.jdbc.Driver
+    driverClassName: com.mysql.cj.jdbc.Driver
 
   jpa:
     hibernate:
