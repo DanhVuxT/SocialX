@@ -25,6 +25,7 @@ public enum ErrorCode {
     POST_NOT_FOUND(2001, "Không tìm thấy bài viết", HttpStatus.NOT_FOUND),
     COMMENT_NOT_FOUND(2002, "Không tìm thấy bình luận", HttpStatus.NOT_FOUND),
     NOT_POST_OWNER(2003, "Bạn không có quyền chỉnh sửa bài viết của người khác", HttpStatus.FORBIDDEN),
+    POST_PERMISSION_DENIED(2004, "Bạn không phải là tác giả của bài viết", HttpStatus.BAD_REQUEST),
 
     // Relationship (Friends, Follows)
     ALREADY_FRIENDS(3001, "Hai bạn đã là bạn bè", HttpStatus.BAD_REQUEST),

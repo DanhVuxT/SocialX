@@ -1,5 +1,6 @@
 package danhvu.example.identity_service.dto.response;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import danhvu.example.identity_service.enums.ApiResponseCode;
 import danhvu.example.identity_service.enums.ErrorCode;
 import lombok.AllArgsConstructor;
@@ -11,6 +12,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class ApiResponse<T> {
     private int code;
     private String message;
