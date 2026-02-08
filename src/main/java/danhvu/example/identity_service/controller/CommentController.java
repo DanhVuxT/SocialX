@@ -5,6 +5,7 @@ import danhvu.example.identity_service.dto.response.ApiResponse;
 import danhvu.example.identity_service.dto.response.CommentResponse;
 import danhvu.example.identity_service.enums.ApiResponseCode;
 import danhvu.example.identity_service.service.CommentService;
+import danhvu.example.identity_service.service.LikeService;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -20,6 +21,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class CommentController {
     CommentService commentService;
+    LikeService likeService;
 
     @PostMapping("/post/{postId}")
     public ApiResponse<CommentResponse> addComment(
@@ -43,8 +45,15 @@ public class CommentController {
         String role = jwt.getClaimAsString("scope");
 
         commentService.deleteComment(commentId, userId, role);
-        return ApiResponse.<Void>builder()
-                .message("Xóa bình luận thành công")
-                .build();
+        return ApiResponse.from(ApiResponseCode.SUCCESS_DELETE);
+    }
+
+    @PostMapping("/like/{commentId}")
+    public ApiResponse<String> toggleLike(
+            @PathVariable Long commentId,
+            @AuthenticationPrincipal Jwt jwt) {
+
+        String userId = jwt.getSubject();
+        return ApiResponse.from(ApiResponseCode.SUCCESS, likeService.toggleLikeComment(commentId, userId));
     }
 }

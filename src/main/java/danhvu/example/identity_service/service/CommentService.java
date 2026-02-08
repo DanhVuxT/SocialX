@@ -37,6 +37,12 @@ public class CommentService {
 
         Comment comment = commentMapper.toComment(request, user, post);
 
+        if (request.getParentId() != null) {
+            Comment parent = commentRepository.findById(request.getParentId())
+                    .orElseThrow(() -> new AppException(ErrorCode.COMMENT_NOT_FOUND));
+            comment.setParent(parent);
+        }
+
         return commentMapper.toCommentResponse(commentRepository.save(comment));
     }
 

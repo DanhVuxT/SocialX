@@ -1,13 +1,9 @@
 package danhvu.example.identity_service.service;
 
-import danhvu.example.identity_service.entity.Post;
-import danhvu.example.identity_service.entity.PostLike;
-import danhvu.example.identity_service.entity.User;
+import danhvu.example.identity_service.entity.*;
 import danhvu.example.identity_service.enums.ErrorCode;
 import danhvu.example.identity_service.exception.AppException;
-import danhvu.example.identity_service.repository.PostLikeRepository;
-import danhvu.example.identity_service.repository.PostRepository;
-import danhvu.example.identity_service.repository.UserRepository;
+import danhvu.example.identity_service.repository.*;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -22,6 +18,8 @@ public class LikeService {
     PostLikeRepository likeRepository;
     PostRepository postRepository;
     UserRepository userRepository;
+    CommentLikeRepository commentLikeRepository;
+    CommentRepository commentRepository;
 
     public String toggleLike(Long postId, String userId) {
         if (likeRepository.existsByUserIdAndPostId(userId, postId)) {
@@ -40,5 +38,21 @@ public class LikeService {
                 .build();
         likeRepository.save(like);
         return "Liked";
+    }
+
+    public String toggleLikeComment(Long commentId, String userId) {
+        if (commentLikeRepository.existsByUserIdAndCommentId(userId, commentId)) {
+            commentLikeRepository.deleteByUserIdAndCommentId(userId, commentId);
+            return "Unliked Comment";
+        }
+
+        User user = userRepository.findById(userId).get();
+        Comment comment = commentRepository.findById(commentId).get();
+
+        commentLikeRepository.save(CommentLike.builder()
+                .user(user)
+                .comment(comment)
+                .build());
+        return "Liked Comment";
     }
 }

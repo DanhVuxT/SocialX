@@ -16,6 +16,8 @@ public class CommentResponse {
     String text;
     LocalDateTime createdAt;
     String username;
+    long likeCount;
+    boolean isLikedByMe;
     List<CommentResponse> replies;
 
 }

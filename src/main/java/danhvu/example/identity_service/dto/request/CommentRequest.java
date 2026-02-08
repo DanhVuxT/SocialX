@@ -17,4 +17,5 @@ import java.util.Set;
 public class CommentRequest {
     String text;
     String userId;
+    Long parentId;
 }

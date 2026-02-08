@@ -29,12 +29,15 @@ public class Comment {
     @JoinColumn(name = "post_id")
     Post post;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "parent_id")
     Comment parent;
 
-    @OneToMany(mappedBy = "parent")
+    @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL)
     List<Comment> replies;
+
+    @OneToMany(mappedBy = "comment", cascade = CascadeType.ALL)
+    List<CommentLike> likes;
 
     @PrePersist
     protected void onCreate() {
